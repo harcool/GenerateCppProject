@@ -57,9 +57,10 @@ cp $CURRENT_DIR/main.cpp ./
 cp $CURRENT_DIR/CMakeLists.txt ./
 sed -i '' "s/PROJECT_NAME_PLACEHOLDER/$PROJECT_NAME/" CMakeLists.txt
 
+mkdir build && cd build
+cmake -B . -S ../
+make 
+
 #create src directory  : TODO P1
 #create test directory : TODO P1
-#create build directory : TODO P0
-#run cmake -B <pathToBuild> -S <sourceDir> : TODO P0
-#run make : TODO P0
 
