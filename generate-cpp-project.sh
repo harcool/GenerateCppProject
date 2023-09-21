@@ -52,12 +52,13 @@ if [ $PROJECT_NAME != "" ]; then
 fi
 
 cd $CURRENT_DIR
-cd $PROJECT_PARENT_PATH
-cp $CURRENT_DIR/main.cpp ./$PROJECT_NAME/
+cd $PROJECT_PARENT_PATH/$PROJECT_NAME
+cp $CURRENT_DIR/main.cpp ./
+cp $CURRENT_DIR/CMakeLists.txt ./
+sed -i '' "s/PROJECT_NAME_PLACEHOLDER/$PROJECT_NAME/" CMakeLists.txt
 
 #create src directory  : TODO P1
 #create test directory : TODO P1
-#create CMakeLists.txt file for whole project : TODO P0
 #create build directory : TODO P0
 #run cmake -B <pathToBuild> -S <sourceDir> : TODO P0
 #run make : TODO P0
