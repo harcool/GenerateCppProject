@@ -9,7 +9,7 @@ Options:
     -p <ParentDirectory>, --parentDir=<Parentdirectory> specify the parent directory [Required]
 "
 
-
+CURRENT_DIR=$(pwd)
 PROJECT_PARENT_PATH=""
 while getopts ":n:hp:-:" OPT; do
     #OPT would store the flag
@@ -47,12 +47,14 @@ if [ ! -d $PROJECT_PARENT_PATH ]; then
 fi 
 
 if [ $PROJECT_NAME != "" ]; then
-    cd "$PROJECT_PARENT_PATH"
+    cd $PROJECT_PARENT_PATH
     mkdir $PROJECT_NAME
 fi
 
-#create main.cpp : TODO P0
-#add boiler plate code to the main.cpp : TODO P0
+cd $CURRENT_DIR
+cd $PROJECT_PARENT_PATH
+cp $CURRENT_DIR/main.cpp ./$PROJECT_NAME/
+
 #create src directory  : TODO P1
 #create test directory : TODO P1
 #create CMakeLists.txt file for whole project : TODO P0
