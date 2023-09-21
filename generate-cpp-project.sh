@@ -6,11 +6,12 @@ _usage="
 Usage: $0 [ OPTIONS ]
 Options:
     -n <ProjectName>, --name=<ProjectName> specify the project name [Required]
+    -p <ParentDirectory>, --parentDir=<Parentdirectory> specify the parent directory [Required]
 "
 
-CURRENT_PATH=$(pwd)
-PROJECT_PARENT_PATH=$(dirname ${CURRENT_PATH})
-while getopts ":n:h-:" OPT; do
+
+PROJECT_PARENT_PATH=""
+while getopts ":n:hp:-:" OPT; do
     #OPT would store the flag
     #OPTARG would store the argument if the flag is followed by : 
     if [ "$OPT" = "-" ]; then   # long option: reformulate OPT and OPTARG
@@ -21,6 +22,9 @@ while getopts ":n:h-:" OPT; do
     case "${OPT}" in 
         n | name) 
         PROJECT_NAME=${OPTARG}
+        ;;
+        p | parentDir)
+        PROJECT_PARENT_PATH=${OPTARG}
         ;;
         h | help)
         echo "$_usage"
@@ -36,6 +40,11 @@ while getopts ":n:h-:" OPT; do
         ;;
     esac
 done 
+#error handling 
+if [ ! -d $PROJECT_PARENT_PATH ]; then
+    echo "invalid parent directory"
+    exit 0
+fi 
 
 if [ $PROJECT_NAME != "" ]; then
     cd "$PROJECT_PARENT_PATH"
